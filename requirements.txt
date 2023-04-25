@@ -1,3 +1,4 @@
+pandas==1.5.3
 fastapi
 flashtext==2.7
 git+https://github.com/boudinfl/pke.git
