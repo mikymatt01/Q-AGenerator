@@ -45,7 +45,7 @@ class Summarizer:
         text = "summarize: "+text
         # print (text)
         max_len = 512
-        encoding = tokenizer.encode_plus(text,max_length=max_len, pad_to_max_length=False,truncation=True, return_tensors="pt").to(self.device)
+        encoding = tokenizer.encode_plus(text,model_max_length=max_len,max_length=max_len, pad_to_max_length=False,truncation=True, return_tensors="pt").to(self.device)
 
         input_ids, attention_mask = encoding["input_ids"], encoding["attention_mask"]
 
