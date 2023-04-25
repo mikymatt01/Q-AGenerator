@@ -1,4 +1,3 @@
-import gradio as gr
 import json
 from summarizer import Summarizer
 from keyExtractor import KeyExtractor
@@ -33,6 +32,6 @@ def run(text):
     })
   return result
 
-if __name__ == '__main__':
-    demo = gr.Interface(fn=run, inputs="text", outputs="json")
-    demo.launch()
+#if __name__ == '__main__':
+#    demo = gr.Interface(fn=run, inputs="text", outputs="json")
+#    demo.launch()

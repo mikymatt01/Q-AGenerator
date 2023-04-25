@@ -1,7 +1,7 @@
-from fastapi import FastAPI
 from app import run
-import gradio as gr
+import streamlit as st
 
-demo = gr.Interface(fn=run, inputs="text", outputs="json")
-demo.launch(share=True)
+paragraph = st.text_input("paragraph")
+questgen = run(paragraph)
+st.json(questgen)
 
