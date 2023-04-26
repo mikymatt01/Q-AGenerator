@@ -5,5 +5,5 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 EXPOSE 8501
 COPY . .
-CMD python3 -m streamlit run main.py
+CMD python3 main.py
 # -m streamlit run
