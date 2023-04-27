@@ -3,9 +3,10 @@ from summarizer import Summarizer
 from keyExtractor import KeyExtractor
 from questionGeneration import QuestionGeneration
 from textwrap3 import wrap
+import gradio as gr
 import os
-
 import spacy
+
 nIp = spacy.load("en_core_web_sm")
 
 import en_core_web_sm
@@ -32,6 +33,6 @@ def run(text):
     })
   return result
 
-#if __name__ == '__main__':
-#    demo = gr.Interface(fn=run, inputs="text", outputs="json")
-#    demo.launch()
+if __name__ == '__main__':
+    demo = gr.Interface(fn=run, inputs="text", outputs="json")
+    demo.launch()
