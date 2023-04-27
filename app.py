@@ -35,4 +35,4 @@ def run(text):
 
 if __name__ == '__main__':
     demo = gr.Interface(fn=run, inputs="text", outputs="json")
-    demo.launch()
+    demo.launch(share=True)
