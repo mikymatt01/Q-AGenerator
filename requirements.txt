@@ -1,5 +1,6 @@
 pandas==1.5.3
 fastapi
+uvicorn[standard]
 flashtext==2.7
 git+https://github.com/boudinfl/pke.git
 sentencepiece==0.1.95

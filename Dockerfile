@@ -1,9 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM python:3.9
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim AS builder
 WORKDIR /code
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-EXPOSE 8501
-COPY . .
-CMD ["python","-u","app.py"]
+COPY ./requirements.txt /code/requirements.txt
+RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends git
+EOF
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY . /code
+CMD ["python","-u","run.py"]
+# CMD ["uvicorn", "run:app", "--host", "0.0.0.0", "--port", "80"]
 # -m streamlit run
