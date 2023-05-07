@@ -5,7 +5,7 @@ flashtext==2.7
 git+https://github.com/boudinfl/pke.git
 sentencepiece==0.1.95
 textwrap3==0.9.2
-gradio==3.9
+gradio==3.14
 strsim==0.0.3
 sense2vec==2.0.1
 sentence-transformers==2.2.2
