@@ -32,3 +32,16 @@ class QuestionGeneration:
         Question = dec[0].replace("question:","")
         Question= Question.strip()
         return Question
+
+Question = QuestionGeneration()
+
+def run(text, answer):
+    ques = Question.get_question(text,answer)
+    return ques
+
+@app.get("/")
+def read_main():
+    return {"message": "This is your main app"}
+
+io = gr.Interface(fn=run, inputs="text", outputs="json")
+app = gr.mount_gradio_app(app, io, path=CUSTOM_PATH)

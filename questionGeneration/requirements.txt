@@ -1,0 +1,4 @@
+torch
+fastapi
+gradio==3.14
+transformers
