@@ -4,6 +4,7 @@ services:
     image: key-extractor:latest
     ports:
       - "1234:1234"
+    restart: always
     depends_on:
       - summarizer
 
@@ -11,6 +12,7 @@ services:
     image: summarizer:latest
     ports:
       - "1235:1235"
+    restart: always
     depends_on:
       - question-generator
 
@@ -18,3 +20,4 @@ services:
     image: question-generator:latest
     ports:
       - "1236:1236"
+    restart: always
