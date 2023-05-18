@@ -37,3 +37,5 @@ for keyphrase in keyphrase_list:
 
   data = response["data"][0]
   print(data)
+  print(keyphrase)
+  print()
