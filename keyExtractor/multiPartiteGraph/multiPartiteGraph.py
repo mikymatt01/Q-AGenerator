@@ -5,12 +5,7 @@ import string
 import pke
 import traceback
 from flashtext import KeywordProcessor
-import gradio as gr
 from fastapi import FastAPI
-
-CUSTOM_PATH = "/gradio"
-
-app = FastAPI()
 
 class KeyExtractor:
 
@@ -67,9 +62,14 @@ def run(text, summarized_text):
     })
   return result
 
-@app.get("/")
-def read_main():
-    return {"message": "This is your main app"}
+from pydantic import BaseModel
+from fastapi import FastAPI
 
-io = gr.Interface(fn=run, inputs=["text", "text"], outputs="json")
-app = gr.mount_gradio_app(app, io, path=CUSTOM_PATH)
+app = FastAPI()
+class Data(BaseModel):
+    text: str
+    summarized_text: str
+
+@app.post("/")
+async def read_main(data: Data):
+    return run(data.text, data.summarized_text)

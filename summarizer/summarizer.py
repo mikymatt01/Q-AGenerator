@@ -3,8 +3,6 @@ from transformers import T5ForConditionalGeneration,T5Tokenizer
 import random
 import numpy as np
 import nltk
-from fastapi import FastAPI
-import gradio as gr
 
 nltk.download('punkt')
 nltk.download('brown')
@@ -15,10 +13,6 @@ from nltk.tokenize import sent_tokenize
 
 import locale
 locale.getpreferredencoding = lambda: "UTF-8"
-
-CUSTOM_PATH = "/gradio"
-
-app = FastAPI()
 
 class Summarizer:
     def __init__(self):
@@ -49,7 +43,6 @@ class Summarizer:
             tokenizer = self.tokenizer
         text = text.strip().replace("\n"," ")
         text = "summarize: "+text
-        # print (text)
         max_len = 512
         encoding = tokenizer.encode_plus(text,max_length=max_len, pad_to_max_length=False,truncation=True, return_tensors="pt").to(self.device)
 
@@ -79,9 +72,13 @@ def run(text):
   summarized_text = Summary.summarizer(text)
   return summarized_text
 
-@app.get("/")
-def read_main():
-    return {"message": "This is your main app"}
+from pydantic import BaseModel
+from fastapi import FastAPI
 
-io = gr.Interface(fn=run, inputs="text", outputs="json")
-app = gr.mount_gradio_app(app, io, path=CUSTOM_PATH)
+app = FastAPI()
+class Data(BaseModel):
+    text: str
+
+@app.post("/")
+async def read_main(data: Data):
+    return run(data.text)

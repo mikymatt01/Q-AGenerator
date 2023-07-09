@@ -1,11 +1,5 @@
 import torch
 from transformers import T5ForConditionalGeneration,T5Tokenizer
-from fastapi import FastAPI
-import gradio as gr
-
-CUSTOM_PATH = "/gradio"
-
-app = FastAPI()
 
 class QuestionGeneration:
     def __init__(self):
@@ -45,9 +39,14 @@ def run(text, answer):
     ques = Question.get_question(text,answer)
     return ques
 
-@app.get("/")
-def read_main():
-    return {"message": "This is your main app"}
+from pydantic import BaseModel
+from fastapi import FastAPI
 
-io = gr.Interface(fn=run, inputs=["text", "text"], outputs="json")
-app = gr.mount_gradio_app(app, io, path=CUSTOM_PATH)
+app = FastAPI()
+class Data(BaseModel):
+    summarized_text: str
+    keyphrase: str
+@app.post("/")
+async def read_main(data: Data):
+    return run(data.summarized_text, data.keyphrase)
+

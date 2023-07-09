@@ -1,5 +1,6 @@
 torch
 fastapi
-gradio==3.14
+pydantic
 sentencepiece==0.1.95
 transformers
+uvicorn

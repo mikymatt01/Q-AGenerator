@@ -1,0 +1,5 @@
+sense2vec==2.0.1
+sentence_transformers==2.2.2
+pydantic
+fastapi
+uvicorn

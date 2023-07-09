@@ -1,6 +1,7 @@
 torch
+pydantic
 fastapi
-gradio==3.14
 sentencepiece==0.1.95
 transformers
 nltk
+uvicorn
