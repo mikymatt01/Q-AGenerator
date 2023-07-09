@@ -5,6 +5,7 @@ import string
 import pke
 import traceback
 from flashtext import KeywordProcessor
+from fastapi import FastAPI
 
 class KeyExtractor:
 
@@ -28,14 +29,11 @@ class KeyExtractor:
                                           threshold=0.75,
                                           method='average')
             keyphrases = extractor.get_n_best(n=15)
-
-
             for val in keyphrases:
                 out.append(val[0])
         except:
             out = []
             traceback.print_exc()
-
         return out
 
     def get_keywords(self, originaltext, summarytext):
@@ -44,14 +42,34 @@ class KeyExtractor:
       keyword_processor = KeywordProcessor()
       for keyword in keywords:
         keyword_processor.add_keyword(keyword)
-
       keywords_found = keyword_processor.extract_keywords(summarytext)
       keywords_found = list(set(keywords_found))
       print ("keywords_found in summarized: ",keywords_found)
-
       important_keywords =[]
       for keyword in keywords:
-        if keyword in keywords_found:
+        if keyword in keywords_found and keyword not in important_keywords:
           important_keywords.append(keyword)
-
       return important_keywords[:4]
+
+Key = KeyExtractor()
+
+def run(text, summarized_text):
+  result = []
+  imp_keywords = Key.get_keywords(text,summarized_text)
+  for answer in imp_keywords:
+    result.append({
+        "answer": answer.capitalize()
+    })
+  return result
+
+from pydantic import BaseModel
+from fastapi import FastAPI
+
+app = FastAPI()
+class Data(BaseModel):
+    text: str
+    summarized_text: str
+
+@app.post("/")
+async def read_main(data: Data):
+    return run(data.text, data.summarized_text)

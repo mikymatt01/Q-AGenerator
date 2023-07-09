@@ -1,0 +1,6 @@
+torch
+fastapi
+pydantic
+sentencepiece==0.1.95
+transformers
+uvicorn

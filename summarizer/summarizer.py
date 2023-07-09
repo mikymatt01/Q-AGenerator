@@ -43,7 +43,6 @@ class Summarizer:
             tokenizer = self.tokenizer
         text = text.strip().replace("\n"," ")
         text = "summarize: "+text
-        # print (text)
         max_len = 512
         encoding = tokenizer.encode_plus(text,max_length=max_len, pad_to_max_length=False,truncation=True, return_tensors="pt").to(self.device)
 
@@ -67,14 +66,19 @@ class Summarizer:
 
         return summary
 
-'''
-if __name__ == '__main__':
-    print ("\noriginal Text >>")
-    for wrp in wrap(text, 150):
-      print (wrp)
-    print ("\n")
-    print ("Summarized Text >>")
-    for wrp in wrap(summarized_text, 150):
-      print (wrp)
-    print ("\n")
-'''
+Summary = Summarizer()
+
+def run(text):
+  summarized_text = Summary.summarizer(text)
+  return summarized_text
+
+from pydantic import BaseModel
+from fastapi import FastAPI
+
+app = FastAPI()
+class Data(BaseModel):
+    text: str
+
+@app.post("/")
+async def read_main(data: Data):
+    return run(data.text)
