@@ -17,7 +17,7 @@ sleep 200
 
 echo "execute: ${cwd} ${comandi[2]}"
 osascript -e "tell application \"Terminal\" to do script \"cd $cwd; ${comandi[2]}\""
-sleep 200
+sleep 30
 
 echo "execute: ${cwd} ${comandi[3]}"
 osascript -e "tell application \"Terminal\" to do script \"cd $cwd; ${comandi[3]}\""

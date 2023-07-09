@@ -24,19 +24,18 @@ response = requests.post(f"{base_url}:{phra_key}", json={
   "summarized_text": summarized_text,
 }).json()
 
-keyphrase_list = response["data"][0]
+keyphrase_list = response
 
 print("questions")
 result = []
 for keyphrase in keyphrase_list:
   keyphrase = keyphrase["answer"]
-  response = requests.post(f"{base_url}:{ques_key}", json={
+  question = requests.post(f"{base_url}:{ques_key}", json={
     "summarized_text": summarized_text,
     "keyphrase": keyphrase,
   }).json()
-
-  data = response["data"][0]
-  
+  distractors = requests.post(f"{base_url}:{dist_key}", json={
+    "keyphrase": keyphrase,
+  }).json()
+  data = { "question":response, "answer": keyphrase, "distractors": distractors }
   print(data)
-  print(keyphrase)
-  print()
