@@ -34,19 +34,3 @@ class QuestionGeneration:
         return Question
 
 Question = QuestionGeneration()
-
-def run(text, answer):
-    ques = Question.get_question(text,answer)
-    return ques
-
-from pydantic import BaseModel
-from fastapi import FastAPI
-
-app = FastAPI()
-class Data(BaseModel):
-    summarized_text: str
-    keyphrase: str
-@app.post("/")
-async def read_main(data: Data):
-    return run(data.summarized_text, data.keyphrase)
-

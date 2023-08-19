@@ -68,17 +68,3 @@ class Summarizer:
 
 Summary = Summarizer()
 
-def run(text):
-  summarized_text = Summary.summarizer(text)
-  return summarized_text
-
-from pydantic import BaseModel
-from fastapi import FastAPI
-
-app = FastAPI()
-class Data(BaseModel):
-    text: str
-
-@app.post("/")
-async def read_main(data: Data):
-    return run(data.text)

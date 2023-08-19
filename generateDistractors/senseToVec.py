@@ -56,16 +56,3 @@ class S2V:
     }
 
 sense2Vec = S2V()
-def run(originalword):
-  return sense2Vec.execute(originalword)
-
-from pydantic import BaseModel
-from fastapi import FastAPI
-
-app = FastAPI()
-class Data(BaseModel):
-    keyphrase: str
-
-@app.post("/")
-async def read_main(data: Data):
-    return run(data.keyphrase)
