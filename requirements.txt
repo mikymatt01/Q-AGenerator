@@ -9,3 +9,4 @@ transformers
 nltk
 gradio
 keybert
+wget
