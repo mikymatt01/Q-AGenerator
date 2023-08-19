@@ -1,11 +1,18 @@
 from sense2vec import Sense2Vec
 from fastapi import FastAPI
 from sentence_transformers import SentenceTransformer
-from mmr import mmr
+import wget
+import os
+from .mmr import mmr
+
+url = 'https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz'
+cmd = 'tar -xvf {}'
 
 class S2V:
   def __init__(self):
     self.model= SentenceTransformer('all-MiniLM-L12-v2')
+    filename = wget.download(url)
+    os.system(cmd.format(filename))
     self.s2v = Sense2Vec().from_disk('s2v_old')
     
   def removeDuplicates(most_similar, originalword):
