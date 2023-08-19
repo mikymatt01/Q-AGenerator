@@ -6,3 +6,4 @@ torch
 sentencepiece==0.1.95
 transformers
 nltk
+wget
