@@ -1,4 +1,0 @@
-pydantic
-fastapi
-uvicorn
-rake-nltk
