@@ -15,7 +15,7 @@ class S2V:
     os.system(cmd.format(filename))
     self.s2v = Sense2Vec().from_disk('s2v_old')
     
-  def removeDuplicates(most_similar, originalword):
+  def removeDuplicates(self, most_similar, originalword):
     distractors = []
     #remove duplicates
     for each_word in most_similar:
