@@ -48,12 +48,9 @@ class S2V:
     for dist in final_distractors:
       filtered_distractors.append(dist[0])
 
-    Answer = filtered_distractors[0]
+    #Answer = filtered_distractors[0]
     Filtered_Distractors =  filtered_distractors[1:]
-    return {
-      "answer": Answer,
-      "distractors": Filtered_Distractors
-    }
+    return Filtered_Distractors
 
 sense2Vec = S2V()
 def run(originalword):
