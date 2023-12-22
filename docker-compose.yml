@@ -27,9 +27,3 @@ services:
     ports:
       - "1237:1237"
     restart: always
-
-  # tester-rouge:
-  #   image: tester-rouge:latest
-  #   ports:
-  #     - "1236:1236"
-  #   restart: always
