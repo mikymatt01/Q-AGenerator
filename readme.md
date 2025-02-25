@@ -1,34 +1,47 @@
-# QA Generator
+# QA Generator  
 
-This service generate multiple choice questions (MCQ) about generic text. To do this, I implement three modules:
+This service generates multiple-choice questions (MCQs) from generic text using three key modules:  
 
-- Keyword Extractor: to extract keywords from a passage
-- Question Generator: to generate a question from a keyword and passage
-- Distractors generator: to generate keyword distractors
+- **Keyword Extractor** – Identifies important keywords from a passage.  
+- **Question Generator** – Creates a question based on a keyword and its passage.  
+- **Distractor Generator** – Produces plausible but incorrect answer choices.  
 
-## Structure of the Project
+## Project Structure  
 
-There are three branches in github repository, one for each keyword extractor.
+The GitHub repository is organized into three branches, each corresponding to a different keyword extraction method.  
 
-### keyExtractor
+### **Keyword Extraction**  
 
-There are three alternatives to extract key phrases that have been implemented:
+Three different approaches have been implemented to extract key phrases:  
 
-- keyBert[[1]](#1) (based on Bert transformer)
-- multipartiteGraph[[2]](#2)
-- Rake[[3]](#3) (rapid automatic keyword extractor)
+- **KeyBERT** [[1]](#1) – Uses BERT-based embeddings.  
+- **MultipartiteGraph** [[2]](#2) – Leverages graph-based ranking.  
+- **RAKE** [[3]](#3) – A rapid automatic keyword extraction technique.  
 
-### generateDistractors
+### **Distractor Generation**  
 
-This module generate wrong alternatives, given keyword using sense2vec.[[4]](#4)
+This module generates incorrect but contextually relevant answer choices using **Sense2Vec**.[[4]](#4)  
 
-### questionGeneration
+### **Question Generation**  
 
-T5 transformer is trained on SQUAD dataset to generate question from keyword and passage.
+A **T5 Transformer** model, trained on the **SQuAD dataset**, generates questions based on extracted keywords and their passages.  
 
-## Execute the Project
+## Running the Project  
 
-Each module is implemented as docker image. To build each one, execute `build.sh` and to set up services, run `run.sh`. To test if everything runs correctly, execute `test.py`
+Each module is packaged as a Docker container. To set up the project:  
+
+1. **Build the Docker images** by running:  
+   ```sh
+   ./build.sh
+   ```  
+2. **Start the services** with:  
+   ```sh
+   ./run.sh
+   ```  
+3. **Verify the setup** by executing:  
+   ```sh
+   python test.py
+   ```  
 
 ## References
 
